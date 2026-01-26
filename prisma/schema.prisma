@@ -1,0 +1,328 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  content   String?
+  published Boolean  @default(false)
+  authorId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Admin User
+model Admin {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String
+  email     String?
+  name      String?
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ========== BERANDA ==========
+model BerandaHero {
+  id           String   @id @default(cuid())
+  title         String
+  subtitle      String
+  description   String
+  buttonText1   String
+  buttonText2   String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model BerandaWhySection {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model BerandaFeature {
+  id          String   @id @default(cuid())
+  icon        String
+  title       String
+  description String
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model BerandaStatistic {
+  id       String  @id @default(cuid())
+  label    String
+  value    String
+  order    Int     @default(0)
+  isActive Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model BerandaNewsHeader {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  buttonText  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model BerandaCTA {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  buttonText  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ========== PROFIL ==========
+model ProfilHistory {
+  id        String   @id @default(cuid())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProfilMilestone {
+  id        String   @id @default(cuid())
+  year      String
+  event     String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProfilAchievement {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ProfilVisi {
+  id        String   @id @default(cuid())
+  content   String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProfilMisi {
+  id        String   @id @default(cuid())
+  content   String
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProfilOrgStructure {
+  id       String   @id @default(cuid())
+  name     String
+  position String
+  level    Int      @default(2)
+  order    Int      @default(0)
+  isActive Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProfilGeoInfo {
+  id       String   @id @default(cuid())
+  label    String
+  value    String
+  order    Int     @default(0)
+  isActive Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProfilAreaDescription {
+  id        String   @id @default(cuid())
+  content   String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ========== PELAYANAN ==========
+model PelayananHero {
+  id        String   @id @default(cuid())
+  title     String
+  description String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PelayananImportantInfo {
+  id        String   @id @default(cuid())
+  icon      String
+  title     String
+  content   String
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PelayananCategory {
+  id        String   @id @default(cuid())
+  category  String
+  icon      String
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PelayananService {
+  id           String   @id @default(cuid())
+  categoryId   String
+  title        String
+  description  String
+  requirements String
+  processingTime String
+  order        Int      @default(0)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model PelayananCTA {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  button1     String
+  button2     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ========== POTENSI WISATA ==========
+model PotensiHero {
+  id        String   @id @default(cuid())
+  title     String
+  description String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PotensiCategory {
+  id        String   @id @default(cuid())
+  name      String
+  deskripsi String
+  icon      String
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PotensiPlace {
+  id          String   @id @default(cuid())
+  categoryId  String
+  nama        String
+  alamat      String
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ========== BERITA ==========
+model BeritaHero {
+  id        String   @id @default(cuid())
+  title     String
+  description String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model BeritaItem {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  date        String
+  content     String?
+  category    String?
+  author      String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ========== KONTAK ==========
+model KontakHero {
+  id        String   @id @default(cuid())
+  title     String
+  description String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model KontakInfoItem {
+  id       String   @id @default(cuid())
+  icon     String
+  title    String
+  content  String
+  order    Int      @default(0)
+  isActive Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model KontakOffice {
+  id       String   @id @default(cuid())
+  name     String
+  address  String
+  city     String
+  phone    String
+  fax      String
+  email    String
+  whatsapp String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model KontakSocialMedia {
+  id       String   @id @default(cuid())
+  platform String
+  url      String
+  icon     String
+  order    Int      @default(0)
+  isActive Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model KontakAdditionalInfo {
+  id        String   @id @default(cuid())
+  content   String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
